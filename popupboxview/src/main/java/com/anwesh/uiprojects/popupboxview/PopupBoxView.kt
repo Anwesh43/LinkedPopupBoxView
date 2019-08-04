@@ -187,4 +187,26 @@ class PopupBoxView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : PopupBoxView) {
+
+        private val animator : Animator = Animator(view)
+        private val pb : PopupBox = PopupBox(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            pb.draw(canvas, paint)
+            animator.animate {
+                pb.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            pb.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
