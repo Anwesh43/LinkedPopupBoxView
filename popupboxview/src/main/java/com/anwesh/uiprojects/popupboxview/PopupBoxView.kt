@@ -210,4 +210,12 @@ class PopupBoxView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+        fun create(activity : Activity) : PopupBoxView {
+            val view : PopupBoxView = PopupBoxView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
