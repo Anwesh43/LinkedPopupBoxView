@@ -33,12 +33,12 @@ fun Float.mirrorValue(a : Int, b : Int) : Float {
 }
 fun Float.updateValue(dir : Float, a : Int, b : Int) : Float = mirrorValue(a, b) * dir * scGap
 
-fun Canvas.drawPopup(i : Int, size : Float, sc : Float, paint : Paint) {
+fun Canvas.drawPopup(size : Float, sc : Float, paint : Paint) {
     val r : Float = size / rFactor
     drawCircle(size * sc.divideScale(0, parts), 0f, r, paint)
-    val x : Float = size - r
+    val x : Float = size
     val updatedSize : Float = x * sc.divideScale(1, parts)
-    drawRect(RectF(-x / 2, r, -x / 2 + updatedSize, r + updatedSize), paint)
+    drawRect(RectF(r, r, r + updatedSize, r + updatedSize), paint)
 }
 
 fun Canvas.drawPBNode(i : Int, scale : Float, paint : Paint) {
@@ -51,7 +51,7 @@ fun Canvas.drawPBNode(i : Int, scale : Float, paint : Paint) {
     paint.strokeCap = Paint.Cap.ROUND
     save()
     translate(w / 2, gap * (i + 1))
-    drawPopup(i, size, scale, paint)
+    drawPopup(size, scale, paint)
     restore()
 }
 
@@ -215,7 +215,7 @@ class PopupBoxView(ctx : Context) : View(ctx) {
         fun create(activity : Activity) : PopupBoxView {
             val view : PopupBoxView = PopupBoxView(activity)
             activity.setContentView(view)
-            return view 
+            return view
         }
     }
 }
